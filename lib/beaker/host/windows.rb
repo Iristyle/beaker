@@ -53,5 +53,25 @@ module Windows
         'pathseparator'     => ';',
       })
     end
+
+    def self.aio_defaults
+      h = self.foss_defaults
+      # below are how these values are set in hosts/unix.rb
+      # h['puppetbindir']   = '/opt/puppetlabs/agent/bin'
+      # h['puppetbin']      = "#{h['puppetbindir']}/puppet"
+      # h['puppetpath']     = '/etc/puppetlabs/agent'
+      # h['puppetconfdir']  = "#{h['puppetpath']}/config"
+      # h['puppetcodedir']  = "#{h['puppetpath']}/code"
+      # h['puppetvardir']   = '/opt/puppetlabs/agent/cache'
+      # h['distmoduledir']  = "#{h['puppetcodedir']}/modules"
+      # h['sitemoduledir']  = '/opt/puppetlabs/agent/modules'
+      # h['hieraconf']      = "#{h['puppetcodedir']}/hiera.yaml"
+      # h['hieradatadir']   = "#{h['puppetcodedir']}/hieradata"
+
+      # TOOD: these values were never previously used on Windows ... do we care about them???
+      h['puppetbin']      = "#{h['puppetbindir']}/puppet"
+      h['hieradatadir']   = "#{h['puppetcodedir']}/hieradata"
+      h
+    end
   end
 end
