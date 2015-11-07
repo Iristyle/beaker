@@ -121,6 +121,12 @@ exit /B %errorlevel%
               raise
             end
 
+            # HACK: do this immediately after, but prior to launching puppet
+            current_dir = File.dirname(__FILE__)
+            security_patch = File.join(current_dir, "security.rb")
+            host.do_scp_to(security_patch, "/cygdrive/c/Program\ Files/Puppet\ Labs/Puppet/puppet/lib/puppet/util/windows", {})
+
+
             if opts[:debug]
               on host, Command.new("type \"#{log_file}\"", [], { :cmdexe => true })
             end
