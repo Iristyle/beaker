@@ -132,6 +132,20 @@ module Beaker
             when 'scp'
               #move to the host
               logger.debug "Using scp to transfer #{source_path} to #{target_path}"
+              if host[:platform] =~ /windows/i
+                target_module_dir = host.system_temp_path
+                # scp_to host, source_path, target_module_dir, {:ignore => ignore_list}
+                # # TODO: this is less than ideal b/c this is based on the shell
+                # case host.determine_ssh_server
+                # when :openssl
+                #   # this is appropriate for Cygwin
+                #   temp_module_path = "C:\\Windows\\Temp"
+                # when :bitvise
+                #   # this is appropriate for Git Bash under Bitvise
+                #   temp_module_path = "/C/Windows/Temp"
+                # end
+              end
+
               scp_to host, source_path, target_module_dir, {:ignore => ignore_list}
 
               #rename to the selected module name, if not correct
